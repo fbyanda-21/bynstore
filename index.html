@@ -198,6 +198,97 @@
       left: 0;
     }
 
+        .music-button {
+      background: var(--primary);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .music-button:hover {
+      background: var(--primary-light);
+      transform: scale(1.1);
+    }
+
+    .music-menu {
+      position: fixed;
+      top: 70px;
+      right: 20px;
+      background: rgba(26, 26, 46, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      z-index: 98;
+      display: none;
+      flex-direction: column;
+      width: 280px;
+      max-height: 70vh;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .music-menu.active {
+      display: flex;
+    }
+
+    .music-list {
+      overflow-y: auto;
+      margin-bottom: 15px;
+      max-height: 50vh;
+    }
+
+    .music-item {
+      padding: 10px 12px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+    }
+
+    .music-item:hover {
+      background: rgba(67, 97, 238, 0.2);
+    }
+
+    .music-item.playing {
+      background: var(--primary);
+      color: white;
+    }
+
+    .music-item i {
+      margin-right: 10px;
+      font-size: 14px;
+    }
+
+    .stop-music-btn {
+      background: var(--danger);
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .stop-music-btn:hover {
+      background: #e01e5a;
+    }
+
+    .stop-music-btn i {
+      margin-right: 5px;
+    }
+
     .foto-profil {
       width: 180px;
       height: 180px;
@@ -457,12 +548,53 @@
       margin-bottom: 15px;
     }
     
-    footer {
-      text-align: center;
-      margin-top: 30px;
-      padding: 20px;
-      color: #666;
+        .potoiklan {
+      display: block;
+      margin: 15px auto;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
+
+    .footer {
+      text-align: center;
+      padding: 20px;
+      background: var(--dark);
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-light);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .navbar h1 {
+        font-size: 1.5rem;
+      }
+      
+      .music-menu {
+        width: 250px;
+        right: 10px;
+      }
         
     @keyframes fadeIn {
       from { opacity: 0; }
@@ -491,6 +623,74 @@
       border:solid;
       border-radius:25px;
     }
+
+    /* Customer Service Button */
+    .customer-service {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+    
+    .cs-button {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
+      box-shadow: 0 4px 20px rgba(67, 97, 238, 0.4);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      animation: pulse 2s infinite;
+    }
+    
+    .cs-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 25px rgba(67, 97, 238, 0.6);
+    }
+    
+    .cs-button i {
+      margin: 0;
+    }
+    
+    .cs-tooltip {
+      position: absolute;
+      bottom: 70px;
+      right: 0;
+      background: rgba(26, 26, 46, 0.9);
+      color: white;
+      padding: 8px 15px;
+      border-radius: 8px;
+      font-size: 14px;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .cs-button:hover + .cs-tooltip {
+      opacity: 1;
+      visibility: visible;
+      bottom: 75px;
+    }
+    
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(67, 97, 238, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(67, 97, 238, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(67, 97, 238, 0);
+      }
+        }
     
     /* Menambahkan style untuk konten yang berada di luar page */
     .main-content {
@@ -511,6 +711,14 @@
       <button id="btnCloseModal">open web</button>
     </div>
   </div>
+
+    <!-- Customer Service Button -->
+  <div class="customer-service">
+    <div class="cs-button" onclick="window.open('https://wa.me/628174921656', '_blank')">
+      <i class="fas fa-headset"></i>
+    </div>
+    <div class="cs-tooltip">Butuh Bantuan?</div>
+  </div>
   
   <div class="navbar">
     <div class="menu-icon" onclick="toggleMenu()">
@@ -528,10 +736,58 @@
       <a href="#home" onclick="showPage('home')">𝐡𝐨𝐦𝐞</a>
     </div>
     <h1> 𝐛𝐲𝐧𝐬𝐭𝐨𝐫𝐞 </h1>
-    <button class="music-button" onclick="toggleMusik()">
+    <button class="music-button" onclick="toggleMusikMenu()">
       <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="white">
         <path d="M9 3v12.55A4 4 0 1 0 11 19V7h6V3H9z"/>
       </svg>
+    </button>
+  </div>
+
+  <!-- Menu Musik -->
+  <div class="music-menu" id="musicMenu">
+    <div class="music-list">
+      <div class="music-item" onclick="playMusic('https://files.catbox.moe/spadk5.mp3', this)">
+        <i class="fas fa-music"></i> death bed
+      </div>
+      <div class="music-item" onclick="playMusic('https://files.catbox.moe/l7yjkn.mp3', this)">
+        <i class="fas fa-music"></i> lemon tree
+      </div>
+      <div class="music-item" onclick="playMusic('https://files.catbox.moe/64rrze.mp3', this)">
+        <i class="fas fa-music"></i> surrender
+      </div>
+      <div class="music-item" onclick="playMusic('https://files.catbox.moe/rg0mtu.mp3', this)">
+        <i class="fas fa-music"></i> past lives
+      </div>
+      <div class="music-item" onclick="playMusic('https://files.catbox.moe/05vn8z.mp3', this)">
+        <i class="fas fa-music"></i> play date
+      </div>
+      <div class="music-item" onclick="playMusic('https://files.catbox.moe/fdw8o8.mp3', this)">
+        <i class="fas fa-music"></i> trouble is a friend
+      </div>
+      <div class="music-item" onclick="playMusic('https://files.catbox.moe/c6gtik.mp3', this)">
+        <i class="fas fa-music"></i> rude
+      </div>
+      <div class="music-item" onclick="playMusic('https://files.catbox.moe/rm82lu.mp3', this)">
+        <i class="fas fa-music"></i> love story (TS)
+      </div>
+      <div class="music-item" onclick="playMusic('https://files.catbox.moe/mqxmmt.mp3', this)">
+        <i class="fas fa-music"></i> love story (indila)
+      </div>
+      <div class="music-item" onclick="playMusic('https://files.catbox.moe/ulw7i2.mp3', this)">
+        <i class="fas fa-music"></i> dusk till down
+      </div>
+      <div class="music-item" onclick="playMusic('https://files.catbox.moe/c0fspy.mp3', this)">
+        <i class="fas fa-music"></i> somewhere only we know
+      </div>
+      <div class="music-item" onclick="playMusic('https://files.catbox.moe/svkvc3.mp3', this)">
+        <i class="fas fa-music"></i> off my face
+      </div>
+      <div class="music-item" onclick="playMusic('https://files.catbox.moe/kwaku9.mp3', this)">
+        <i class="fas fa-music"></i> dandelions
+      </div>
+    </div>
+    <button class="stop-music-btn" onclick="stopMusic()">
+      <i class="fas fa-stop"></i> Stop Musik
     </button>
   </div>
 
@@ -591,14 +847,32 @@
           <li>𝟷𝟶𝟶 𝚏𝚘𝚕𝚜 = 𝟹.𝟶𝟶𝟶</li>
           <li>𝟻𝟶𝟶 𝚏𝚘𝚕𝚜 = 𝟷𝟶.𝟶𝟶𝟶</li>
           <li>𝟷.𝟶𝟶𝟶 𝚏𝚘𝚕𝚜 = 𝟷𝟾.𝟶𝟶𝟶</li>
-          <li class="excluded">𝐈𝐍𝐒𝐓𝐀𝐆𝐑𝐀𝐌 𝐋𝐈𝐊𝐄</li>
+          <li class="excluded">𝐈𝐍𝐒𝐓𝐀𝐆𝐑𝐀𝐌 𝐋𝐈𝐊𝐄𝐒</li>
           <Li>𝟷.𝟶𝟶𝟶 𝚕𝚒𝚔𝚎 = 𝟸.𝟶𝟶𝟶</Li>
           <li>𝟻.𝟶𝟶𝟶 𝚕𝚒𝚔𝚎 = 𝟹.𝟶𝟶𝟶</li>
           <li>𝟷𝟶.𝟶𝟶𝟶 𝚕𝚒𝚔𝚎 = 𝟻.𝟶𝟶𝟶</li>
+          <li class="excluded">𝐈𝐍𝐒𝐓𝐀𝐆𝐑𝐀𝐌 𝐋𝐈𝐊𝐄𝐒 𝐈𝐍𝐃𝐎𝐍𝐄𝐒𝐈𝐀</li>
+          <li>𝟷𝟶𝟶 𝚕𝚒𝚔𝚎 = 𝟻.𝟶𝟶𝟶</li>
+          <li>𝟻𝟶𝟶 𝚕𝚒𝚔𝚎 = 𝟷𝟻.𝟶𝟶𝟶</li>
+          <li>𝟷.𝟶𝟶𝟶 𝚕𝚒𝚔𝚎 = 𝟸𝟽.𝟶𝟶𝟶</li>
+          <li class="excluded">𝐈𝐍𝐒𝐓𝐀𝐆𝐑𝐀𝐌 𝐋𝐈𝐊𝐄𝐒 𝐈𝐍𝐃𝐎𝐍𝐄𝐒𝐈𝐀[gender👨👩]</li>
+          <li>𝟷𝟶𝟶 𝚕𝚒𝚔𝚎 = 𝟸.𝟶𝟶𝟶</li>
+          <li>𝟻𝟶𝟶 𝚕𝚒𝚔𝚎 = 𝟼.𝟶𝟶𝟶</li>
+          <li>𝟷.𝟶𝟶𝟶 𝚕𝚒𝚔𝚎 = 𝟷𝟷.𝟶𝟶𝟶</li>
           <li class="excluded">𝐈𝐍𝐒𝐓𝐀𝐆𝐑𝐀𝐌 𝐕𝐈𝐄𝐖𝐒</li>
           <li>𝟻.𝟶𝟶𝟶 𝚟𝚒𝚎𝚠𝚜 = 𝟹.𝟶𝟶𝟶</li>
           <li>𝟷𝟶.𝟶𝟶𝟶 𝚟𝚒𝚎𝚠𝚜 = 𝟻.𝟶𝟶𝟶</li>
           <li>𝟸𝟻.𝟶𝟶𝟶 𝚟𝚒𝚎𝚠𝚜 = 𝟾.𝟶𝟶𝟶</li>
+          <li class="excluded">𝐈𝐍𝐒𝐓𝐀𝐆𝐑𝐀𝐌 𝐂𝐎𝐌𝐌𝐄𝐍𝐓𝐒 [𝐜𝐨𝐬𝐭𝐮𝐦𝐞]</li>
+          <li>𝚁𝚙𝟺𝟶.𝟶𝟶𝟶 𝚙𝚎𝚛 𝚋𝚊𝚛𝚒𝚜</li>
+          <li class="excluded">𝐈𝐍𝐒𝐓𝐀𝐆𝐑𝐀𝐌 𝐂𝐎𝐌𝐌𝐄𝐍𝐓𝐒 [𝚛𝚊𝚗𝚍𝚘𝚖]</li>
+          <li>𝟷𝟶𝟶 𝚌𝚘𝚖𝚖𝚎𝚗𝚝 = 𝟽.𝟶𝟶𝟶</li>
+          <li>𝟻𝟶𝟶 𝚌𝚘𝚖𝚖𝚎𝚗𝚝 = 𝟹𝟸.𝟶𝟶𝟶</li>
+          <li>𝟷.𝟶𝟶𝟶 𝚌𝚘𝚖𝚖𝚎𝚗𝚝 = 𝟼𝟷.𝟶𝟶𝟶</li>
+          <li class="excluded">𝐈𝐍𝐒𝐓𝐀𝐆𝐑𝐀𝐌 𝐂𝐎𝐌𝐌𝐄𝐍𝐓𝐒 [𝚎𝚖𝚘𝚓𝚒]</li>
+          <li>𝟷𝟶𝟶 𝚌𝚘𝚖𝚖𝚎𝚗𝚝 = 𝟻.𝟶𝟶𝟶</li>
+          <li>𝟻𝟶𝟶 𝚌𝚘𝚖𝚖𝚎𝚗𝚝 = 𝟸𝟸.𝟶𝟶𝟶</li>
+          <li>𝟷.𝟶𝟶𝟶 𝚌𝚘𝚖𝚖𝚎𝚗𝚝 = 𝟺𝟷.𝟶𝟶𝟶</li>
         </ul>
       </div>
       <a href="https://wa.me/628174921656?text=min+aku+mau+order+kebsos+instagram" target="_blank" class="buy-button">
@@ -622,6 +896,16 @@
           <li>𝟻.𝟶𝟶𝟶 𝚟𝚒𝚎𝚠𝚜 = 𝟹.𝟶𝟶𝟶</li>
           <li>𝟷𝟶.𝟶𝟶𝟶 𝚟𝚒𝚎𝚠𝚜 = 𝟻.𝟶𝟶𝟶</li>
           <li>𝟸𝟻.𝟶𝟶𝟶 𝚟𝚒𝚎𝚠𝚜 = 𝟾.𝟶𝟶𝟶</li>
+          <li class="excluded">𝐓𝐈𝐊𝐓𝐎𝐊 𝐂𝐎𝐌𝐌𝐄𝐍𝐓𝐒 [𝐜𝐨𝐬𝐭𝐮𝐦𝐞]</li>
+          <li>𝚁𝚙𝟷𝟻.𝟶𝟶𝟶 𝚙𝚎𝚛 𝚋𝚊𝚛𝚒𝚜</li>
+          <li class="excluded">𝐓𝐈𝐊𝐓𝐎𝐊 𝐂𝐎𝐌𝐌𝐄𝐍𝐓𝐒 [𝚛𝚊𝚗𝚍𝚘𝚖]</li>
+          <li>𝟷𝟶𝟶 𝚌𝚘𝚖𝚖𝚎𝚗𝚝 = 𝟹.𝟶𝟶𝟶</li>
+          <li>𝟻𝟶𝟶 𝚌𝚘𝚖𝚖𝚎𝚗𝚝 = 𝟾.𝟶𝟶𝟶</li>
+          <li>𝟷.𝟶𝟶𝟶 𝚌𝚘𝚖𝚖𝚎𝚗𝚝 = 𝟷𝟻.𝟶𝟶𝟶</li>
+          <li class="excluded">𝐓𝐈𝐊𝐓𝐎𝐊 𝐂𝐎𝐌𝐌𝐄𝐍𝐓𝐒 [𝚎𝚖𝚘𝚓𝚒]</li>
+          <li>𝟷𝟶𝟶 𝚌𝚘𝚖𝚖𝚎𝚗𝚝 = 𝟸.𝟶𝟶𝟶</li>
+          <li>𝟻𝟶𝟶 𝚌𝚘𝚖𝚖𝚎𝚗𝚝 = 𝟽.𝟶𝟶𝟶</li>
+          <li>𝟷.𝟶𝟶𝟶 𝚌𝚘𝚖𝚖𝚎𝚗𝚝 = 𝟷𝟺.𝟶𝟶𝟶</li>
         </ul>
       </div>
       <a href="https://wa.me/628174921656?text=min+aku+mau+order+kebsos+tiktok" target="_blank" class="buy-button">
@@ -645,11 +929,43 @@
           <li>𝟷𝟶𝟶 𝚟𝚒𝚎𝚠𝚜 = 𝟹.𝟶𝟶𝟶</li>
           <li>𝟻𝟶𝟶 𝚟𝚒𝚎𝚠𝚜 = 𝟾.𝟶𝟶𝟶</li>
           <li>𝟷.𝟶𝟶𝟶 𝚟𝚒𝚎𝚠𝚜 = 𝟷𝟾.𝟶𝟶𝟶</li>
-        </ul>
+          <li class="excluded">𝐘𝐎𝐔𝐓𝐔𝐁𝐄 𝐂𝐎𝐌𝐌𝐄𝐍𝐓𝐒 [𝐜𝐨𝐬𝐭𝐮𝐦𝐞]</li>
+          <li>𝚁𝚙𝟺𝟸.𝟶𝟶𝟶 𝚙𝚎𝚛 𝚋𝚊𝚛𝚒𝚜</li>
+          <li class="excluded">𝐘𝐎𝐔𝐓𝐔𝐁𝐄 𝐂𝐎𝐌𝐌𝐄𝐍𝐓𝐒 [𝚛𝚊𝚗𝚍𝚘𝚖]</li>
+          <li>𝟷𝟶𝟶 𝚌𝚘𝚖𝚖𝚎𝚗𝚝 = 𝟹.𝟶𝟶𝟶</li>
+          <li>𝟻𝟶𝟶 𝚌𝚘𝚖𝚖𝚎𝚗𝚝 = 𝟾.𝟶𝟶𝟶</li>
+          <li>𝟷.𝟶𝟶𝟶 𝚌𝚘𝚖𝚖𝚎𝚗𝚝 = 𝟷𝟻.𝟶𝟶𝟶</li>
+          <li class="excluded">𝐘𝐎𝐔𝐓𝐔𝐁𝐄 𝐂𝐎𝐌𝐌𝐄𝐍𝐓𝐒 [𝚛𝚊𝚗𝚍𝚘𝚖][𝚎𝚖𝚘𝚓𝚒]</li>
+          <li>𝟷𝟶𝟶 𝚌𝚘𝚖𝚖𝚎𝚗𝚝 = 𝟽.𝟶𝟶𝟶</li>
+          <li>𝟻𝟶𝟶 𝚌𝚘𝚖𝚖𝚎𝚗𝚝 = 𝟸𝟾.𝟶𝟶𝟶</li>
+          <li>𝟷.𝟶𝟶𝟶 𝚌𝚘𝚖𝚖𝚎𝚗𝚝 = 𝟻𝟻.𝟶𝟶𝟶</li>
+          <li class="excluded">𝐘𝐎𝐔𝐓𝐔𝐁𝐄 𝐒𝐇𝐀𝐑𝐄𝐒</li>
+          <li>𝟷𝟶𝟶 𝚜𝚑𝚊𝚛𝚎 = 𝟹.𝟶𝟶𝟶</li>
+          <li>𝟻𝟶𝟶 𝚜𝚑𝚊𝚛𝚎 = 𝟷𝟸.𝟶𝟶𝟶</li>
+          <li>𝟷.𝟶𝟶𝟶 𝚜𝚑𝚊𝚛𝚎 = 𝟸𝟹.𝟶𝟶𝟶</li>
       </div>
       <a href="https://wa.me/628174921656?text=min+aku+mau+order+kebsos+youtube" target="_blank" class="buy-button">
         𝐜𝐡𝐚𝐭 𝐚𝐝𝐦𝐢𝐧𝐭</a>
     </div>
+    
+        <div class="card">
+      <img class="img-promotion" src="https://files.catbox.moe/b9xuoi.jpg">
+      <h2>𝕎ℍ𝔸𝕋𝕊𝔸ℙℙ</h2>
+      <div class="benefits">
+        <ul>
+          <li class="excluded">𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏 𝐂𝐇𝐀𝐍𝐍𝐄𝐋</li>
+          <li>𝟷𝟶𝟶 𝚖𝚎𝚖 = 𝟻.𝟶𝟶𝟶</li>
+          <li>𝟻𝟶𝟶 𝚖𝚎𝚖 = 𝟸𝟷.𝟶𝟶𝟶</li>
+          <li>𝟷.𝟶𝟶𝟶 𝚖𝚎𝚖 = 𝟺𝟶.𝟶𝟶𝟶</li>
+          <li class="excluded">𝐖𝐇𝐀𝐓𝐒𝐀𝐏𝐏 𝐂𝐇𝐀𝐍𝐍𝐄𝐋 𝐄𝐌𝐎𝐉𝐈 𝐑𝐄𝐀𝐂𝐓𝐈𝐎𝐍𝐒</li>
+          <li>1𝟶𝟶 𝚛𝚎𝚊𝚌𝚝 = 𝟹.𝟶𝟶𝟶</li>
+          <li>𝟻𝟶𝟶 𝚛𝚎𝚊𝚌𝚝 = 𝟷𝟶.𝟶𝟶𝟶</li>
+          <li>𝟷𝟶𝟶𝟶 𝚛𝚎𝚊𝚌𝚝 = 𝟷𝟾.𝟶𝟶𝟶</li>
+        </ul>
+      </div>
+      <a href="https://wa.me/628174921656?text=min+aku+mau+order+kebsos+channel+whatsapp" target="_blank" class="buy-button">
+        𝐜𝐡𝐚𝐭 𝐚𝐝𝐦𝐢𝐧𝐭</a>
+        </div>
   </div>
 
   <!-- nokos section -->
@@ -1051,22 +1367,171 @@
       }
     }
 
-    let musik = document.getElementById("musik");
-    let playing = false;
-
-    function toggleMusik() {
-      if (playing) {
-        musik.pause();
-      } else {
-        musik.play();
-      }
-      playing = !playing;
-    }
+    let currentPlayingItem = null;
+    let isPlaying = false;
+    const musik = document.getElementById("musik");
     
+    // Inisialisasi musik dengan volume yang sesuai
+    musik.volume = 0.7;
+    
+    // Fungsi untuk toggle menu navigasi
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.classList.toggle("open");
+      
+      const garisAtas = document.querySelector('.garis.atas');
+      const garisTengah = document.querySelector('.garis.tengah');
+      const garisBawah = document.querySelector('.garis.bawah');
+      
+      if (menu.classList.contains('open')) {
+        garisAtas.style.transform = 'rotate(45deg) translate(5px, 5px)';
+        garisTengah.style.opacity = '0';
+        garisBawah.style.transform = 'rotate(-45deg) translate(5px, -5px)';
+        garisBawah.style.width = '30px';
+      } else {
+        garisAtas.style.transform = 'none';
+        garisTengah.style.opacity = '1';
+        garisBawah.style.transform = 'none';
+        garisBawah.style.width = '10px';
+      }
+    }
+
+    // Fungsi untuk toggle menu musik
+    function toggleMusikMenu() {
+      const musicMenu = document.getElementById("musicMenu");
+      musicMenu.classList.toggle("active");
+      
+      // Jika musik sedang diputar, ganti ikon tombol
+      const musicButton = document.querySelector('.music-button');
+      if (isPlaying) {
+        musicButton.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="white">
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+          </svg>
+        `;
+      } else {
+        musicButton.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="white">
+            <path d="M9 3v12.55A4 4 0 1 0 11 19V7h6V3H9z"/>
+          </svg>
+        `;
+      }
+    }
+
+    // Fungsi untuk memutar musik
+    function playMusic(url, element) {
+      // Hentikan musik yang sedang diputar
+      musik.pause();
+      
+      // Hapus status playing dari item sebelumnya
+      if (currentPlayingItem) {
+        currentPlayingItem.classList.remove("playing");
+      }
+      
+      // Set sumber musik baru
+      musik.src = url;
+      musik.play()
+        .then(() => {
+          isPlaying = true;
+          
+          // Tandai item yang sedang diputar
+          element.classList.add("playing");
+          currentPlayingItem = element;
+          
+          // Update ikon tombol musik
+          const musicButton = document.querySelector('.music-button');
+          musicButton.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="white">
+              <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+            </svg>
+          `;
+        })
+        .catch(error => {
+          console.log("Autoplay prevented: ", error);
+          // Tetap tandai item yang dipilih meski autoplay diblokir
+          element.classList.add("playing");
+          currentPlayingItem = element;
+          isPlaying = false;
+        });
+      
+      // Sembunyikan menu setelah memilih lagu
+      document.getElementById("musicMenu").classList.remove("active");
+    }
+
+    // Fungsi untuk menghentikan musik
+    function stopMusic() {
+      musik.pause();
+      musik.currentTime = 0;
+      isPlaying = false;
+      
+      // Hapus status playing
+      if (currentPlayingItem) {
+        currentPlayingItem.classList.remove("playing");
+        currentPlayingItem = null;
+      }
+      
+      // Update ikon tombol musik
+      const musicButton = document.querySelector('.music-button');
+      musicButton.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="white">
+          <path d="M9 3v12.55A4 4 0 1 0 11 19V7h6V3H9z"/>
+        </svg>
+      `;
+    }
+
+    // Menutup menu musik ketika klik di luar area menu
+    document.addEventListener('click', function(event) {
+      const musicMenu = document.getElementById("musicMenu");
+      const musicButton = document.querySelector('.music-button');
+      
+      if (musicMenu.classList.contains('active') && 
+          !musicMenu.contains(event.target) && 
+          !musicButton.contains(event.target)) {
+        musicMenu.classList.remove('active');
+      }
+    });
+    
+    // Menutup menu navigasi ketika link diklik
     document.querySelectorAll('.side-menu a').forEach(link => {
       link.addEventListener('click', () => {
         document.getElementById("menu").classList.remove("open");
       });
+    });
+
+    // Modal welcome
+    window.addEventListener('load', function() {
+      const modal = document.getElementById('welcomeModal');
+      const btnClose = document.getElementById('btnCloseModal');
+
+      btnClose.addEventListener('click', function() {
+        modal.style.display = 'none';
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          modal.style.display = 'none';
+        }
+      });
+      
+      // Coba memutar musik setelah interaksi pengguna
+      document.body.addEventListener('click', function() {
+        if (!isPlaying) {
+          musik.play()
+            .then(() => {
+              isPlaying = true;
+              // Update ikon tombol musik
+              const musicButton = document.querySelector('.music-button');
+              musicButton.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="white">
+                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                </svg>
+              `;
+            })
+            .catch(error => {
+              console.log("Autoplay prevented: ", error);
+            });
+        }
+      }, { once: true });
     });
 
     window.addEventListener('load', function() {
@@ -1117,4 +1582,4 @@
     }
   </script>
 </body>
-</html>
+  </html>
