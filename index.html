@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>webpage-bynstore</title>
+  <title>BynStore - Layanan Digital Terpercaya</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="https://files.catbox.moe/twzkt0.jpg" type="image/x-icon">
   <style>
     :root {
       --primary: #4361ee;
@@ -16,18 +17,34 @@
       --success: #4cc9f0;
       --danger: #f72585;
       --warning: #f8961e;
+      --gray: #6c757d;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
     
     body {
-      margin: 0;
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+.page, .card, .card-aboutme {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
       font-family: 'Poppins', sans-serif;
       background: url('https://files.catbox.moe/oors3w.jpg') no-repeat center center fixed;
       background-size: cover;
       color: var(--light);
-      text-align: center;
       line-height: 1.6;
       position: relative;
       scroll-behavior: smooth;
+      min-height: 100vh;
+      padding-bottom: 60px;
     }
 
     body::after {
@@ -41,92 +58,79 @@
       z-index: -1;
     }
 
+    /* Welcome Modal */
     #welcomeModal {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
+      background-color: var(--dark);
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       z-index: 9999;
-      backdrop-filter: blur(5px);
     }
 
     .modal-content {
-      background-color: var(--dark);
-      border-radius: 16px;
-      padding: 2rem;
       text-align: center;
-      max-width: 90%;
-      width: 320px;
-      box-shadow: 0 0 25px var(--primary-light);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .modal-content h1 {
-      margin: 0 0 0.5rem;
-      font-size: 2rem;
-      color: var(--light);
-      background: linear-gradient(90deg, var(--primary), var(--primary-light));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .modal-content p {
-      margin: 0 0 1.5rem;
-      font-size: 0.9rem;
-      color: #ddd;
-      letter-spacing: 0.5px;
-    }
-
-    .modal-content button {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: white;
-      font-size: 1rem;
-      font-weight: bold;
-      padding: 0.6rem 1.2rem;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(67, 97, 238, 0.4);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    
-    .modal-content button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(67, 97, 238, 0.6);
-    }
-    
-    .hero {
-      min-height: 15vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      padding-top: 8px;
-      position: relative;
+      justify-content: center;
     }
 
-    .hero h1 {
-      font-size: 2.5rem;
+    .loading-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .loading-spinner {
+      width: 80px;
+      height: 80px;
+      border: 5px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      border-top: 5px solid var(--primary);
+      animation: spin 1s linear infinite;
       margin-bottom: 20px;
-      line-height: 1.2;
     }
 
-    .hero h1 span {
-      color: var(--primary);
-      text-shadow: 0 0 15px rgba(67, 97, 238, 0.6);
-    }
-    .hero p span {
-      color: var(--primary);
-      text-shadow: 0 0 15px rgba(67, 97, 238, 0.6);
-    }
-    .span {
-      color: var(--primary);
-      text-shadow: 0 0 15px rgba(67, 97, 238, 0.6);
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
+    .loading-text {
+      font-size: 24px;
+      margin-top: 20px;
+      color: var(--light);
+    }
+
+    .typing-animation {
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid var(--primary);
+      animation: typing 1.5s steps(15, end) infinite, blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent; }
+      50% { border-color: var(--primary); }
+    }
+
+    /* Sembunyikan modal setelah loading */
+    .hidden {
+      display: none !important;
+    }
+
+    /* Header & Navigation */
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -147,6 +151,8 @@
       gap: 5px;
       cursor: pointer;
       z-index: 101;
+      width: 30px;
+      height: 25px;
     }
 
     .garis {
@@ -164,56 +170,90 @@
     .side-menu {
       position: fixed;
       top: 0;
-      left: -250px;
-      width: 200px;
-      height: 350%;
-      background: rgba(26, 26, 46, 0.95);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      border-radius: 18px;
+      left: -300px;
+      width: 300px;
+      height: 100vh;
+      background: var(--dark);
       padding: 80px 20px 20px;
-      gap: 15px;
-      transition: left 0.3s ease;
       z-index: 99;
-      backdrop-filter: blur(10px);
-      border-right: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .side-menu a {
-      color: white;
-      text-decoration: none;
-      font-size: 18px;
-      padding: 10px 15px;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-    }
-    
-    .side-menu a:hover {
-      background: rgba(255, 255, 255, 0.1);
-      transform: translateX(5px);
+      transition: left 0.3s ease;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
     }
 
     .side-menu.open {
       left: 0;
     }
 
-        .music-button {
-      background: var(--primary);
+    .side-menu a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      padding: 12px 15px;
+      margin: 10px 0;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .side-menu a:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .side-menu p {
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 0;
+    }
+
+    .navbar h1 {
+      font-size: 3.8rem;
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 0;
+    }
+
+    /* Music Player */
+    .music-button {
+      background: rgba(255, 255, 255, 0.1);
       border: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       cursor: pointer;
+      padding: 10px;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+      position: relative;
     }
 
     .music-button:hover {
-      background: var(--primary-light);
+      background: var(--primary);
       transform: scale(1.1);
+    }
+    
+    .music-tooltip {
+      position: absolute;
+      bottom: -40px;
+      right: 0;
+      background: var(--primary);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 14px;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+
+    .music-tooltip.show {
+      opacity: 1;
     }
 
     .music-menu {
@@ -241,6 +281,7 @@
     .music-list {
       overflow-y: auto;
       margin-bottom: 15px;
+      margin-top: 15px;
       max-height: 50vh;
     }
 
@@ -252,14 +293,17 @@
       transition: all 0.3s ease;
       display: flex;
       align-items: center;
+      background: rgba(255, 255, 255, 0.05);
+      color: #ddd;
     }
 
     .music-item:hover {
       background: rgba(67, 97, 238, 0.2);
+      color: white;
     }
 
     .music-item.playing {
-      background: var(--primary);
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
       color: white;
     }
 
@@ -279,6 +323,7 @@
       align-items: center;
       justify-content: center;
       transition: all 0.3s ease;
+      font-weight: 500;
     }
 
     .stop-music-btn:hover {
@@ -287,6 +332,12 @@
 
     .stop-music-btn i {
       margin-right: 5px;
+    }
+
+    /* Profile Section */
+    .profile-section {
+      text-align: center;
+      padding: 20px 0;
     }
 
     .foto-profil {
@@ -323,7 +374,6 @@
       font-size: 24px;
       border-radius: 50%;
       transition: all 0.3s ease;
-      backdrop-filter: blur(5px);
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
@@ -333,6 +383,32 @@
       box-shadow: 0 10px 20px rgba(67, 97, 238, 0.3);
     }
 
+    .sosmed1 {
+      justify-content: left;
+      margin: 30px 0;
+    }
+
+    .sosmed1 a {
+      justify-content: left;
+      width: 35px;
+      height: 35px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 20px;
+      border-radius: 15%;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 12px;
+      margin-bottom: 12px;
+    }
+
+    .sosmed1 a:hover {
+      transform: translateY(-5px);
+      background: var(--primary);
+      box-shadow: 0 10px 20px rgba(67, 97, 238, 0.3);
+    }
+
+    /* Content Cards */
     .card {
       background: rgba(26, 26, 46, 0.8);
       color: var(--light);
@@ -344,6 +420,7 @@
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.1);
       text-align: center;
+      border-left: 6px solid #6a11cb;
     }
 
     .card h2 {
@@ -358,8 +435,59 @@
     .card p {
       font-size: 18px;
       opacity: 0.9;
+      margin-bottom: 15px;
     }
 
+    .card-aboutme {
+      background: rgba(26, 26, 46, 0.8);
+      color: var(--light);
+      padding: 25px;
+      border-radius: 16px;
+      margin: 20px auto;
+      max-width: 800px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: left;
+      border-left: 6px solid #6a11cb;
+    } 
+
+    .card-aboutme h2 {
+      font-size: 28px;
+      margin-bottom: 15px;
+      color: white;
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .card-aboutme p {
+      font-size: 18px;
+      opacity: 0.9;
+      margin-bottom: 15px;
+    }
+
+    .link-web a {
+      justify-content: left;
+      width: 35px;
+      height: 35px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 30px;
+      border-radius: 15%;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 12px;
+      margin-bottom: 12px;
+    }
+
+    .link-web a:hover {
+      transform: translateY(-5px);
+      background: var(--primary);
+      box-shadow: 0 10px 20px rgba(67, 97, 238, 0.3);
+                            }
+
+    /* Benefits List */
     .benefits ul {
       list-style: none;
       padding: 0;
@@ -390,12 +518,25 @@
       color: var(--danger);
     }
     
-    .duration {
-      font-size: 14px;
-      color: rgba(255, 255, 255, 0.6);
-      margin-bottom: 20px;
+    /* Pricing */
+    .price {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 15px 0;
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     
+    .divider {
+      height: 3px;
+      width: 100px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+      margin: 20px auto;
+      border-radius: 3px;
+    }
+
+    /* Buttons */
     .buy-button {
       display: inline-block;
       padding: 12px 30px;
@@ -421,64 +562,7 @@
       transform: translateY(1px);
     }
 
-    .music-button {
-      background: rgba(255, 255, 255, 0.1);
-      border: none;
-      cursor: pointer;
-      padding: 10px;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(5px);
-    }
-
-    .music-button:hover {
-      background: var(--primary);
-      transform: scale(1.1);
-    }
-    
-    .footer {
-      text-align: center;
-      padding: 20px;
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 14px;
-      margin-top: 50px;
-      background: rgba(26, 26, 46, 0.8);
-      backdrop-filter: blur(10px);
-    }
-    
-    .price {
-      font-size: 24px;
-      font-weight: bold;
-      margin: 15px 0;
-      background: linear-gradient(90deg, var(--primary), var(--primary-light));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    
-    .divider {
-      height: 3px;
-      width: 100px;
-      background: linear-gradient(90deg, var(--primary), var(--primary-light));
-      margin: 20px auto;
-      border-radius: 3px;
-    }
-
-    .img-logo-iklan {
-      border:solid;
-      border-radius:25px;
-    }
-    
-    .img-promotion{
-      border:solid;
-      border-radius:50px;
-      width:250px;
-    }
-
+    /* Tabs Navigation */
     .tabs {
       background: rgba(26, 26, 46, 0.8);
       color: var(--light);
@@ -498,19 +582,19 @@
         
     .tab-button {
       padding: 12px 25px;
-      background: navy;
+      background: rgba(255, 255, 255, 0.1);
       border: none;
       cursor: pointer;
       font-size: 1rem;
       font-weight: 600;
-      color: #666;
+      color: #ddd;
       border-radius: 50px;
       transition: all 0.3s ease;
     }
         
     .tab-button:hover {
-      background: #f0f4ff;
-      color: #2575fc;
+      background: rgba(67, 97, 238, 0.2);
+      color: white;
     }
         
     .tab-button.active {
@@ -518,43 +602,83 @@
       color: white;
     }
         
+    /* Pages */
     .page {
-      background: rgba(26, 26, 46, 0.8)(20px);
+      background: rgba(26, 26, 46, 0.8) (20px);
       color: var(--light);
       padding: 25px;
       border-radius: 16px;
       margin: 20px auto;
       max-width: 800px;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.1);
       text-align: center;
-      display: none; /* Semua halaman disembunyikan secara default */
+      display: none;
     }
         
     .page.active {
-      display: block; /* Hanya halaman aktif yang ditampilkan */
+      display: block;
       animation: fadeIn 0.5s ease;
     }
         
-    .page h2 {
-      color: #2575fc;
+    .page h1 {
+      color: white;
       margin-bottom: 20px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid #f0f4ff;
+      background: linear-gradient(90deg, var(--primary), var(--primary-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
         
     .page p {
       margin-bottom: 15px;
     }
+
+    .back-btn {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 10px 10px 10px 10px;
+      color: white;
+      border-radius: 10px;
+      font-size: 15px;
+      box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+      margin: -5px 450px 25px -5px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+    }
     
-        .potoiklan {
+    .back-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(67, 97, 238, 0.4);
+    }
+    
+    .back-btn:active {
+      transform: translateY(1px);
+    }
+    
+    /* Images */
+    .img-logo-iklan {
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 25px;
+      max-width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .img-promotion {
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50px;
+      width: 250px;
+      max-width: 100%;
+    }
+    
+    .potoiklan {
       display: block;
       margin: 15px auto;
       border-radius: 10px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      max-width: 100%;
     }
 
+    /* Footer */
     .footer {
       text-align: center;
       padding: 20px;
@@ -566,62 +690,20 @@
       border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    /* Scrollbar styling */
-    ::-webkit-scrollbar {
-      width: 6px;
+    /* Overlay */
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 98;
+      display: none;
     }
 
-    ::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 10px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--primary);
-      border-radius: 10px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--primary-light);
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      .navbar h1 {
-        font-size: 1.5rem;
-      }
-      
-      .music-menu {
-        width: 250px;
-        right: 10px;
-      }
-        
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-        
-    @media (max-width: 768px) {
-      .tabs {
-        flex-direction: column;
-        border-radius: 10px;
-      }
-            
-      .tab-button {
-        width: 100%;
-        border-radius: 5px;
-        margin: 2px 0;
-      }
-    }
-    
-    .img-apk{
-      border:solid;
-      border-radius:25px;
-    }
-    
-    .img-logo-iklan {
-      border:solid;
-      border-radius:25px;
+    .menu-overlay.active {
+      display: block;
     }
 
     /* Customer Service Button */
@@ -690,29 +772,121 @@
       100% {
         box-shadow: 0 0 0 0 rgba(67, 97, 238, 0);
       }
-        }
-    
-    /* Menambahkan style untuk konten yang berada di luar page */
-    .main-content {
-      display: block;
     }
     
-    /* Menambahkan style untuk scroll yang lebih halus */
-    html {
-      scroll-behavior: smooth;
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+        
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .navbar h1 {
+        font-size: 1.5rem;
+      }
+      
+      .music-menu {
+        width: 250px;
+        right: 10px;
+        top: 60px;
+      }
+      
+      .tabs {
+        flex-direction: column;
+        border-radius: 10px;
+        padding: 15px;
+      }
+            
+      .tab-button {
+        width: 100%;
+        border-radius: 5px;
+        margin: 2px 0;
+        padding: 10px;
+      }
+      
+      .card, .card-aboutme {
+        padding: 15px;
+        margin: 15px;
+      }
+      
+      .sosmed {
+        gap: 15px;
+      }
+      
+      .sosmed a {
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+      }
+      
+      .foto-profil {
+        width: 150px;
+        height: 150px;
+      }
+      
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .navbar {
+        padding: 10px 15px;
+      }
+      
+      .navbar h1 {
+        font-size: 1.3rem;
+      }
+      
+      .side-menu {
+        width: 250px;
+      }
+      
+      .card, .card-aboutme {
+        padding: 12px;
+        margin: 10px;
+      }
+      
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      
+      .page h1 {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-light);
     }
   </style>
 </head>
 <body>
   <div id="welcomeModal">
     <div class="modal-content">
-      <h1>𝐁𝐘𝐍𝐒𝐓𝐎𝐑𝐄</h1>
-      <p>𝚠𝚎𝚕𝚌𝚘𝚖𝚎 𝚝𝚘 𝚠𝚎𝚋𝚙𝚊𝚐𝚎 𝐛𝐲𝐧𝐬𝐭𝐨𝐫𝐞</p>
-      <button id="btnCloseModal">open web</button>
+      <div class="loading-container">
+        <div class="loading-spinner"></div>
+        <div class="loading-text typing-animation">Loading...</div>
+      </div>
     </div>
-  </div>
+</div>
 
-    <!-- Customer Service Button -->
+  <!-- Customer Service Button -->
   <div class="customer-service">
     <div class="cs-button" onclick="window.open('https://wa.me/628174921656', '_blank')">
       <i class="fas fa-headset"></i>
@@ -720,6 +894,9 @@
     <div class="cs-tooltip">Butuh Bantuan?</div>
   </div>
   
+  <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+
+  <!-- Navigation -->
   <div class="navbar">
     <div class="menu-icon" onclick="toggleMenu()">
       <span class="garis atas"></span>
@@ -727,23 +904,38 @@
       <span class="garis bawah"></span>
     </div>
     <div class="side-menu" id="menu">
-      <a href="#home" onclick="showPage('home')"> 𝐛𝐲𝐧𝐬𝐭𝐨𝐫𝐞 </a>
+      <p>┃ NAVIGASI </p>
+      <a href="#home" onclick="showPage('home')"><i class="fas fa-home"></i>  Home</a>
+      <a href="#about" onclick="showPage('about')"><i class="fas fa-info-circle"></i>  About</a>
+      <p>┃ LAYANAN <i class="fas fa-shopping-cart"></i></p>
       <a href="#kebsos" onclick="showPage('kebsos')">KEBSOS</a>
-      <a href="#apkprem" onclick="showPage('apkprem')">APK PREMIUM</a>
       <a href="#nokos" onclick="showPage('nokos')">NOKOS</a>
+      <a href="#apkprem" 
+onclick="showPage('apkprem')">APK PREMIUM</a>
       <a href="#panel" onclick="showPage('panel')">PANEL PTERO</a>
       <a href="#sewa" onclick="showPage('sewa')">SEWA BOT</a>
-      <a href="#home" onclick="showPage('home')">𝐡𝐨𝐦𝐞</a>
+      <a href="#topup-game" onclick="showPage('topup-game')">TOPUP GAME</a>
+      <a href="#topup-ewallet" onclick="showPage('topup-ewallet')">TOPUP E-WALLET</a>
+      <p>┃ HELP <i class="fas fa-headset"></i></p>
+      <a href="https://wa.me/628174921656" target="_blank">Bantuan</a>
+      <p>┃ KOMUNITAS <i class="fas fa-users"></i></p>
+      <a href="#contact" onclick="showPage('contact')">Contacts <i class="fab fa-whatsapp"></i></a>
+      <a href="https://chat.whatsapp.com/Lp07pnKVHRv75oFNF5fhog" target="_blank">Room Chat <i class="far fa-comments"></i></a>
+      <a href="https://whatsapp.com/channel/0029VbAlkJlChq6W3cyOLL2x" target="_blank">Channel Update <i class="fas fa-bullhorn"></i></a>
+      <p>┃ SONG REQUEST <i class="fas fa-music"></i></p>
+      <a href="https://wa.me/6283853983402?text=min+aku+mau+request+lagu+dong" target="_blank">Chat me <i class="fab fa-whatsapp"></i></a>
     </div>
-    <h1> 𝐛𝐲𝐧𝐬𝐭𝐨𝐫𝐞 </h1>
+    <h1>𝐁𝐘𝐍𝐒𝐓𝐎𝐑𝐄</h1>
     <button class="music-button" onclick="toggleMusikMenu()">
-      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="white">
-        <path d="M9 3v12.55A4 4 0 1 0 11 19V7h6V3H9z"/>
-      </svg>
+      <i class="fas fa-music"></i>
+      <div class="music-tooltip" id="musicTooltip">Pilih musik yang ingin didengar</div>
     </button>
   </div>
 
-  <!-- Menu Musik -->
+  <!-- Music Menu -->
+  <audio id="musik" loop>
+    <source src="" type="audio/mpeg">
+  </audio>
   <div class="music-menu" id="musicMenu">
     <div class="music-list">
       <div class="music-item" onclick="playMusic('https://files.catbox.moe/spadk5.mp3', this)">
@@ -777,7 +969,7 @@
         <i class="fas fa-music"></i> dusk till down
       </div>
       <div class="music-item" onclick="playMusic('https://files.catbox.moe/c0fspy.mp3', this)">
-        <i class="fas fa-music"></i> somewhere only we know
+        <i class="fas fa-music"></i> only we know
       </div>
       <div class="music-item" onclick="playMusic('https://files.catbox.moe/svkvc3.mp3', this)">
         <i class="fas fa-music"></i> off my face
@@ -785,56 +977,103 @@
       <div class="music-item" onclick="playMusic('https://files.catbox.moe/kwaku9.mp3', this)">
         <i class="fas fa-music"></i> dandelions
       </div>
+      <!--tambah music-->
+      
     </div>
     <button class="stop-music-btn" onclick="stopMusic()">
       <i class="fas fa-stop"></i> Stop Musik
     </button>
   </div>
 
-  <!-- Profile Image -->
-  <img class="foto-profil" src="https://files.catbox.moe/twzkt0.jpg" alt="Foto Profil">
+  <!-- Profile Section -->
+  <div id="home" class="page active">
+  <div class="profile-section">
+    <img class="foto-profil" src="https://files.catbox.moe/twzkt0.jpg" alt="Foto Profil BynStore">
 
-  <!-- Social Media -->
-  <div id="rafi-project" class="sosmed">
-    <a href="https://www.instagram.com/fbyan_nnd21?igsh=N21yamdtcXQzZDUz" target="_blank"><i class="fab fa-instagram"></i></a>
-    <a href="https://tiktok.com/@devv.xyunyun" target="_blank"><i class="fab fa-tiktok"></i></a>
-    <a href="https://wa.me/628174921656" target="_blank"><i class="fab fa-whatsapp"></i></a>
-    <a href="https://t.me/fbyanxzz" target="_blank"><i class="fab fa-telegram-plane"></i></a>
-  </div>
+    <!-- Social Media -->
+    <div class="sosmed">
+      <a href="https://www.instagram.com/fbyan_nnd21?igsh=N21yamdtcXQzZDUz" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://tiktok.com/@devv.xyunyun" target="_blank"><i class="fab fa-tiktok"></i></a>
+      <a href="https://wa.me/628174921656" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://t.me/fbyanxzz" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+    </div>
+  
 
   <!-- Hero Section -->
   <div class="card">
     <div class="hero">
-      <h1>𝚠𝚎𝚕𝚌𝚘𝚖𝚎 𝚝𝚘 𝐛𝐲𝐧𝐬𝐭𝐨𝐫𝐞</h1>
+      <h1>𝐖𝐄𝐋𝐂𝐎𝐌𝐄 𝐓𝐎</h1>
+      <h1>𝐁𝐘𝐍𝐒𝐓𝐎𝐑𝐄</h1>
     </div>
-    <p>𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐓𝐈𝐎𝐍:
-    kami menyediakan jasa kebutuhan sosial anda!!
-    seperti suntik followers, suntik like, suntik views dari berbagai platform sosmed.<br>
-    kami juga menyediakan aplikasi premium seperti Spotify, You Tube,dll...<br>
-    dan masih banyak lagi,selebihnya bisa ditanyakan langsung pada admin kami,terimakasih....</p>
-
+    
     <div class="tabs">
-      <p>𝐏𝐈𝐋𝐈𝐇 𝐌𝐄𝐍𝐔 𝐃𝐈 𝐁𝐀𝐖𝐀𝐇 𝐔𝐍𝐓𝐔𝐊 𝐌𝐄𝐍𝐂𝐀𝐑𝐈 𝐏𝐈𝐋𝐈𝐇𝐀𝐍 𝐀𝐍𝐃𝐀</p>
-      <button class="tab-button active" onclick="showPage('home')">𝐁𝐄𝐑𝐀𝐍𝐃𝐀</button>
+      <p>𝐏𝐈𝐋𝐈𝐇 𝐌𝐄𝐍𝐔 𝐃𝐈 𝐁𝐀𝐖𝐀𝐇 𝐀𝐓𝐀𝐔 𝐌𝐄𝐍𝐔 𝐒𝐀𝐌𝐏𝐈𝐍𝐆 𝐔𝐍𝐓𝐔𝐊 𝐌𝐄𝐍𝐂𝐀𝐑𝐈 𝐋𝐀𝐘𝐀𝐍𝐀𝐍 𝐘𝐀𝐍𝐆 𝐀𝐍𝐃𝐀 𝐁𝐔𝐓𝐔𝐇𝐊𝐀𝐍</p>
       <button class="tab-button" onclick="showPage('kebsos')">𝐊𝐄𝐁𝐒𝐎𝐒</button>
       <button class="tab-button" onclick="showPage('nokos')">𝐍𝐎𝐊𝐎𝐒</button>
       <button class="tab-button" onclick="showPage('apkprem')">𝐀𝐏𝐊 𝐏𝐑𝐄𝐌𝐈𝐔𝐌</button>
-      <button class="tab-button" onclick="showPage('panel')">𝐏𝐀𝐍𝐄𝐋</button>
+      <button class="tab-button" onclick="showPage('panel')">𝐏𝐀𝐍𝐄𝐋 𝐏𝐓𝐄𝐑𝐎𝐃𝐀𝐂𝐓𝐘𝐋</button>
       <button class="tab-button" onclick="showPage('sewa')">𝐒𝐄𝐖𝐀 𝐁𝐎𝐓</button>
+      <button class="tab-button" onclick="showPage('topup-game')">𝐓𝐎𝐏𝐔𝐏 𝐆𝐀𝐌𝐄</button>
+      <button class="tab-button" onclick="showPage('topup-ewallet')">𝐓𝐎𝐏𝐔𝐏 𝐄-𝐖𝐀𝐋𝐋𝐄𝐓</button>
     </div>
   </div>
-
-  <!-- Panel Sections -->
-  <div id="home" class="page active">
-    <h1>𝐖𝐄𝐋𝐂𝐎𝐌𝐄 𝐓𝐎 𝐁𝐘𝐍𝐒𝐓𝐎𝐑𝐄</h1>
+  </div>
+ </div>
+  
+  <!-- Home Page -->
+  <div id="about" class="page">
+    <h1>𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐓𝐈𝐎𝐍 𝐀𝐁𝐎𝐔𝐓 𝐓𝐇𝐈𝐒 𝐒𝐓𝐎𝐑𝐄</h1>
     <div class="divider"></div>
-    <img class="potoiklan" src="https://files.catbox.moe/mi6hrb.png" width="250">
-    <img class="potoiklan" src="https://files.catbox.moe/37iks1.jpg" width="250">
-    <img class="potoiklan" src="https://files.catbox.moe/jpsehb.jpg" width="250">
+
+    <div class="card-aboutme">
+      <h2>About BynStore</h2>
+      <p>BynStore adalah jasa yang menyediakan kebsos (kebutuhan sosial) seperti suntik like, suntik follower, suntik views.</p>
+      <p>Dan juga menyediakan nokos (nomor kosong) dan panel pterodactyl untuk BOT WhatsApp.</p>
+      <p>Jasa ini dimulai sejak 2024</p>
+    </div>
+    
+    <div class="card-aboutme">
+      <h2>𝐀𝐝𝐦𝐢𝐧𝐭 𝐂𝐨𝐧𝐭𝐚𝐜𝐭𝐬/𝐒𝐨𝐬𝐦𝐞𝐝</h2>
+      <div class="sosmed1">
+      <a href="https://www.instagram.com/fbyan_nnd21?igsh=N21yamdtcXQzZDUz" target="_blank"><i class="fab fa-instagram"></i> fbyan_nnd21</a><br>
+      <a href="https://www.instagram.com/_vaatzy?igsh=MTIxbm15aHR0cHZqNQ==" target="_blank"><i class="fab fa-instagram"></i> _vaatzy</a><br>
+      <a
+href="https://wa.me/6283853983402" target="_blank"><i class="fab fa-whatsapp"></i> Admin 1</a><br>
+      <a
+href="https://wa.me/6283869456868" target="_blank"><i class="fab fa-whatsapp"></i> Admin 2</a><br>
+        <a href="https://tiktok.com/@devv.xyunyun" target="_blank"><i class="fab fa-tiktok"></i> devv.xyunyun</a><br>
+      <a
+href="https://t.me/fbyanxzz" target="_blank"><i class="fab fa-telegram-plane"></i> Tele admin 1</a><br>
+        <a
+href="https://t.me/devvxyuyun" target="_blank"><i class="fab fa-telegram-plane"></i> Tele admin 2</a>
+      </div>
+    </div>
+
+    <div class="card-aboutme">
+      <h2>𝐈𝐦𝐩𝐨𝐫𝐭𝐚𝐧𝐭 𝐈𝐧𝐟𝐨𝐫𝐦𝐚𝐭𝐢𝐨𝐧</h2>
+      <p>web masih dalam fase pengembangan,jadi jika ada eror atau yang lainya kami mohon harap laporkan ke cs.
+        terimakasih.</p>
+      <p>klik link untuk melihat web yang sedang di kembangkan</p>
+      <div class="link-web"><a href="https://gctwjw.mimo.run/index.html"><i class="fas fa-external-link-alt"></i> buka web</a></div>
+    </div>
+  </div>
+    
+  <!-- About Page -->
+  <div id="contact" class="page">
+    <h1>Contacts BynStore</h1>
+    <div class="divider"></div>
+    
+    <div class="card-aboutme">
+      <h2>Contacts</h2>
+      <p><i class="fab fa-whatsapp"></i> fbyanxzz: +62 838-5398-3402</p>
+      <p><i class="fab fa-whatsapp"></i> devvxyunyun: +62 838-6945-6868</p>
+      <p><i class="fab fa-whatsapp"></i> store: +62 817-4921-656</p>
+    </div>
   </div>
     
   <!--kebsos section-->
   <div id="kebsos" class="page">
+    <button class="back-btn" onclick="showPage('home')"><i class="fas fa-long-arrow-alt-left">back</i></button>
     <h1>𝐋𝐈𝐒𝐓 𝐒𝐔𝐍𝐓𝐈𝐊 𝐌𝐄𝐃𝐒𝐎𝐒</h1>
     <div class="divider"></div>
 
@@ -970,6 +1209,7 @@
 
   <!-- nokos section -->
   <div id="nokos" class="page">
+    <button class="back-btn" onclick="showPage('home')"><i class="fas fa-long-arrow-alt-left">back</i></button>
     <h1>𝐋𝐈𝐒𝐓 𝐍𝐎𝐊𝐎𝐒(𝚗𝚘𝚖𝚎𝚛 𝚔𝚘𝚜𝚘𝚗𝚐)</h1>
     <div class="divider"></div>
 
@@ -999,6 +1239,7 @@
 
   <!-- apkprem section -->
   <div id="apkprem" class="page">
+    <button class="back-btn" onclick="showPage('home')"><i class="fas fa-long-arrow-alt-left">back</i></button>
     <h1>𝐋𝐈𝐒𝐓 𝐀𝐏𝐋𝐈𝐊𝐀𝐒𝐈 𝐏𝐑𝐄𝐌𝐈𝐔𝐌</h1>
     <div class="divider"></div>
 
@@ -1142,6 +1383,7 @@
 
   <!-- panel Ptero -->
   <div id="panel" class="page">
+    <button class="back-btn" onclick="showPage('home')"><i class="fas fa-long-arrow-alt-left">back</i></button>
     <h1>𝐋𝐈𝐒𝐓 𝐏𝐀𝐍𝐄𝐋 𝐏𝐓𝐄𝐑𝐎𝐃𝐀𝐂𝐓𝐘𝐋</h1>
     <div class="divider"></div>
 
@@ -1330,6 +1572,7 @@
 
   <!-- sewa BOT -->
   <div id="sewa" class="page">
+    <button class="back-btn" onclick="showPage('home')"><i class="fas fa-long-arrow-alt-left">back</i></button>
     <h1>𝐋𝐈𝐒𝐓 𝐒𝐄𝐖𝐀 𝐁𝐎𝐓</h1>
     <div class="divider"></div>
 
@@ -1347,11 +1590,28 @@
         𝐜𝐡𝐚𝐭 𝐚𝐝𝐦𝐢𝐧𝐭</a>
     </div>
   </div>
-    
-  <!-- Music -->
-  <audio id="musik" autoplay muted>
-    <source src="https://files.catbox.moe/spadk5.mp3" type="audio/mpeg">
-  </audio>
+
+  <!--topup game-->
+  <div id="topup-game" class="page">
+    <button class="back-btn" onclick="showPage('home')"><i class="fas fa-long-arrow-alt-left">back</i></button>
+    <h1>𝐓𝐎𝐏𝐔𝐏 𝐆𝐀𝐌𝐄</h1>
+    <div class="divider"></div>
+
+    <div class="card">
+      <h2>𝕤𝕖𝕘𝕖𝕣𝕒 𝕙𝕒𝕕𝕚𝕣</h2>
+    </div>
+  </div>
+
+  <!--topup e-wallet-->
+  <div id="topup-ewallet" class="page">
+    <button class="back-btn" onclick="showPage('home')"><i class="fas fa-long-arrow-alt-left">back</i></button>
+    <h1>𝐓𝐎𝐏𝐔𝐏 𝐄-𝐖𝐀𝐋𝐋𝐄𝐓</h1>
+    <div class="divider"></div>
+
+    <div class="card">
+      <h2>𝕤𝕖𝕘𝕖𝕣𝕒 𝕙𝕒𝕕𝕚𝕣</h2>
+    </div>
+  </div>
   
   <!-- Footer -->
   <footer class="footer">
@@ -1360,27 +1620,7 @@
 
   <!-- Script -->
   <script>
-    function toggleMenu() {
-      const menu = document.getElementById("menu");
-      menu.classList.toggle("open");
-      
-      const garisAtas = document.querySelector('.garis.atas');
-      const garisTengah = document.querySelector('.garis.tengah');
-      const garisBawah = document.querySelector('.garis.bawah');
-      
-      if (menu.classList.contains('open')) {
-        garisAtas.style.transform = 'rotate(45deg) translate(5px, 5px)';
-        garisTengah.style.opacity = '0';
-        garisBawah.style.transform = 'rotate(-45deg) translate(5px, -5px)';
-        garisBawah.style.width = '30px';
-      } else {
-        garisAtas.style.transform = 'none';
-        garisTengah.style.opacity = '1';
-        garisBawah.style.transform = 'none';
-        garisBawah.style.width = '10px';
-      }
-    }
-
+    // Variables
     let currentPlayingItem = null;
     let isPlaying = false;
     const musik = document.getElementById("musik");
@@ -1388,10 +1628,21 @@
     // Inisialisasi musik dengan volume yang sesuai
     musik.volume = 0.7;
     
+    // Fungsi untuk menutup modal welcome setelah 3 detik
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        const modal = document.getElementById('welcomeModal');
+        modal.classList.add('hidden');
+      }, 3000);
+    });
+    
     // Fungsi untuk toggle menu navigasi
     function toggleMenu() {
       const menu = document.getElementById("menu");
+      const overlay = document.getElementById("menuOverlay");
+      
       menu.classList.toggle("open");
+      overlay.classList.toggle("active");
       
       const garisAtas = document.querySelector('.garis.atas');
       const garisTengah = document.querySelector('.garis.tengah');
@@ -1409,27 +1660,29 @@
         garisBawah.style.width = '10px';
       }
     }
+    
+    // Fungsi untuk menutup menu
+    function closeMenu() {
+      const menu = document.getElementById("menu");
+      const overlay = document.getElementById("menuOverlay");
+      
+      menu.classList.remove("open");
+      overlay.classList.remove("active");
+      
+      const garisAtas = document.querySelector('.garis.atas');
+      const garisTengah = document.querySelector('.garis.tengah');
+      const garisBawah = document.querySelector('.garis.bawah');
+      
+      garisAtas.style.transform = 'none';
+      garisTengah.style.opacity = '1';
+      garisBawah.style.transform = 'none';
+      garisBawah.style.width = '10px';
+    }
 
     // Fungsi untuk toggle menu musik
     function toggleMusikMenu() {
       const musicMenu = document.getElementById("musicMenu");
       musicMenu.classList.toggle("active");
-      
-      // Jika musik sedang diputar, ganti ikon tombol
-      const musicButton = document.querySelector('.music-button');
-      if (isPlaying) {
-        musicButton.innerHTML = `
-          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="white">
-            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-          </svg>
-        `;
-      } else {
-        musicButton.innerHTML = `
-          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="white">
-            <path d="M9 3v12.55A4 4 0 1 0 11 19V7h6V3H9z"/>
-          </svg>
-        `;
-      }
     }
 
     // Fungsi untuk memutar musik
@@ -1451,14 +1704,6 @@
           // Tandai item yang sedang diputar
           element.classList.add("playing");
           currentPlayingItem = element;
-          
-          // Update ikon tombol musik
-          const musicButton = document.querySelector('.music-button');
-          musicButton.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="white">
-              <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-            </svg>
-          `;
         })
         .catch(error => {
           console.log("Autoplay prevented: ", error);
@@ -1483,14 +1728,6 @@
         currentPlayingItem.classList.remove("playing");
         currentPlayingItem = null;
       }
-      
-      // Update ikon tombol musik
-      const musicButton = document.querySelector('.music-button');
-      musicButton.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="white">
-          <path d="M9 3v12.55A4 4 0 1 0 11 19V7h6V3H9z"/>
-        </svg>
-      `;
     }
 
     // Menutup menu musik ketika klik di luar area menu
@@ -1508,66 +1745,11 @@
     // Menutup menu navigasi ketika link diklik
     document.querySelectorAll('.side-menu a').forEach(link => {
       link.addEventListener('click', () => {
-        document.getElementById("menu").classList.remove("open");
+        closeMenu();
       });
     });
 
-    // Modal welcome
-    window.addEventListener('load', function() {
-      const modal = document.getElementById('welcomeModal');
-      const btnClose = document.getElementById('btnCloseModal');
-
-      btnClose.addEventListener('click', function() {
-        modal.style.display = 'none';
-      });
-
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-          modal.style.display = 'none';
-        }
-      });
-      
-      // Coba memutar musik setelah interaksi pengguna
-      document.body.addEventListener('click', function() {
-        if (!isPlaying) {
-          musik.play()
-            .then(() => {
-              isPlaying = true;
-              // Update ikon tombol musik
-              const musicButton = document.querySelector('.music-button');
-              musicButton.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="white">
-                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-                </svg>
-              `;
-            })
-            .catch(error => {
-              console.log("Autoplay prevented: ", error);
-            });
-        }
-      }, { once: true });
-    });
-
-    window.addEventListener('load', function() {
-      const modal = document.getElementById('welcomeModal');
-      const btnClose = document.getElementById('btnCloseModal');
-
-      btnClose.addEventListener('click', function() {
-        modal.style.display = 'none';
-      });
-
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-          modal.style.display = 'none';
-        }
-      });
-      
-      document.body.addEventListener('click', function() {
-        musik.muted = false;
-        musik.play();
-      }, { once: true });
-    });
-    
+    // Fungsi untuk menampilkan halaman
     function showPage(pageId) {
       // Sembunyikan semua halaman
       const pages = document.querySelectorAll('.page');
@@ -1578,21 +1760,37 @@
       // Tampilkan halaman yang dipilih
       document.getElementById(pageId).classList.add('active');
       
-      // Update tab yang aktif
-      const tabs = document.querySelectorAll('.tab-button');
-      tabs.forEach(tab => {
-        tab.classList.remove('active');
-      });
-      
-      // Temukan tab yang sesuai dengan halaman yang dipilih dan tandai sebagai aktif
-      tabs.forEach(tab => {
-        if (tab.getAttribute('onclick') === `showPage('${pageId}')`) {
-          tab.classList.add('active');
-        }
-      });
-      
       // Scroll ke atas halaman
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+      // Tutup menu jika terbuka
+      closeMenu();
+    }
+
+    // Menampilkan tooltip musik selama 5 detik
+    function showMusicTooltip() {
+      const tooltip = document.getElementById('musicTooltip');
+      tooltip.classList.add('show');
+      
+      setTimeout(() => {
+        tooltip.classList.remove('show');
+      }, 5000);
+    }
+    
+    // Memanggil fungsi saat halaman dimuat
+    window.addEventListener('load', function() {
+      setTimeout(showMusicTooltip, 1000);
+    });
+
+    // Fungsi untuk scroll ke bagian kontak
+    function scrollToContact() {
+      showPage('home');
+      setTimeout(() => {
+        const contactElement = document.getElementById('contact');
+        if (contactElement) {
+          contactElement.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
     }
   </script>
 </body>
